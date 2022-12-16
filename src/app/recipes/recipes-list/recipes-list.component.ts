@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipes-list',
@@ -7,15 +9,19 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipes-list.component.css']
 })
 export class RecipesListComponent implements OnInit {
+
   // holds array of type Recipe which we defined in our recipe.models.ts
   // which we imported above 
-  recipes: Recipe[] = [
-    new Recipe('a test recipe', 'eggs and potatoes', 'https://www.pngkit.com/view/u2q8e6w7y3e6o0q8_recipe-icon/')
-  ];
+  recipes: Recipe[] ;
 
-  constructor(){}
+  constructor(private recipeService : RecipeService, private router: Router,
+      private route: ActivatedRoute){}
+  
+  ngOnInit(){
+    this.recipes = this.recipeService.getRecipes();
+  }
 
-
-  ngOnInit(){}
-
+  onNewRecipe(){
+    this.router.navigate(['new'], {relativeTo: this.route});
+  }
 }

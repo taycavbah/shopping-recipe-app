@@ -1,28 +1,4 @@
-<!-- <nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a href="#" class="navbar-brand">Recipe Book</a>
-        </div>
-
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#">Recipes</a></li>
-                <li><a href="#">Recipes</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" role="button">manage <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Save Data</a></li>
-                        <li><a href="#">Fetch Data</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav> -->
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid px-4">
       <a class="navbar-brand" href="#">Book Recipe</a>
       <button
@@ -39,14 +15,14 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#">Recipes</a>
+            <a class="nav-link" href="#" (click)="onSelect('recipe')">Recipes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Shopping List</a>
+            <a class="nav-link" href="#" (click)="onSelect('shopping-list')">Shopping List</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown me-auto">
+          <li class="nav-item dropdown me-auto" appDropdown>
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -64,4 +40,45 @@
         </ul>
       </div>
     </div>
+  </nav> -->
+
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container-fluid">
+      <a routerLink="/" class="navbar-brand">Recipe Book</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+          <!-- no longer need click and onSelect eventEmitter since we can redict using routing -->
+          <!-- <li class="nav-item"><a class="nav-link active" href="#" (click)="onSelect('recipe')">Recipes</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#" (click)="onSelect('shopping-list')">Shopping List</a></li> -->
+          <li class="nav-item" routerLinkActive="active"><a routerLink="/recipes">Recipes </a></li>
+          <li class="nav-item" routerLinkActive="active"><a routerLink="/shopping-list"> Shopping List</a></li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a style="cursor: pointer" class="nav-link dropdown-toggle" role="button">Manage <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a style="cursor: pointer" class="dropdown-item" >Save Data</a></li>
+              <li><a style="cursor: pointer" class="dropdown-item" >Fetch Data</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
+
+  <div mdbDropdown class="dropdown">
+    <button
+      class="btn btn-primary dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton"
+      aria-expanded="false"
+      mdbDropdownToggle
+    >
+      Dropdown button
+    </button>
+    <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+  </div>
