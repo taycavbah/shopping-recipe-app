@@ -1,9 +1,10 @@
-import { EventEmitter } from "@angular/core";
+import { Subject } from "rxjs";
 import { Ingredient } from "../shared/ingredient.model";
 
 export class ShoppingService {
 
-  ingredientsChanged = new EventEmitter<Ingredient[]>();
+  ingredientsChanged = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>();
 
     private ingredients: Ingredient[] = [
         new Ingredient('apples', 5),
@@ -14,9 +15,19 @@ export class ShoppingService {
         return this.ingredients.slice();
       }
 
+      getIngredient(index: number) {
+        return this.ingredients[index];
+      }
+
       addIngredient(ingredient: Ingredient){
         this.ingredients.push(ingredient);
-        this.ingredientsChanged.emit(this.ingredients.slice());
+        this.ingredientsChanged.next(this.ingredients.slice());
+      }
+
+      updateIngredient(index: number, newIngredient: Ingredient){
+        this.ingredients[index] = newIngredient;
+        // emit updated ingredients
+        this.ingredientsChanged.next(this.ingredients.slice());
       }
 
       addIngredients(ingredients: Ingredient[]){
@@ -26,7 +37,7 @@ export class ShoppingService {
         // in the same way push can push multiple items to our ingredients array
         this.ingredients.push(...ingredients);
         // we have to emit that our ingredients changed - using copy of our array
-        this.ingredientsChanged.emit(this.ingredients.slice());
+        this.ingredientsChanged.next(this.ingredients.slice());
       }
     
 }
